@@ -1,10 +1,10 @@
 require 'matrix'
 
-BIRD_SIZE = 10
-POPULATION_SIZE = 50
+BIRD_SIZE = 7
+POPULATION_SIZE = 30
 WORLD = {:xmax => BIRD_SIZE * 100, :ymax => BIRD_SIZE * 100}
 MAGIC_NUMBER = 7
-SEPARATION_RADIUS = BIRD_SIZE * 2
+SEPARATION_RADIUS = BIRD_SIZE * 3
 ALIGMENT_RADIUS = BIRD_SIZE * 15
 COHESION_RADIUS = BIRD_SIZE * 15
 MAX_BIRD_SPEED = BIRD_SIZE
@@ -14,7 +14,7 @@ ALIGNMENT_ADJUSTMENT = 8 # how aligned are the roids with each other (smaller mo
 COHESION_ADJUSTMENT = 100 # how cohesive the roids are with each other (smaller more cohesive)
 
 OBSTACLE_SIZE = 10
-ENTER_RADIUS = BIRD_SIZE * 10
+CENTER_RADIUS = BIRD_SIZE * 5
 
 class Vector
   def /(x)
@@ -129,7 +129,7 @@ class Bird
 
   def move
     @delta = Vector[0,0]
-    %w[separate align cohere muffle].each do |action|
+    %w[separate align cohere muffle center].each do |action|
       puts "action: #{action}"
       self.send action
     end
