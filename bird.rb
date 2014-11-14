@@ -113,6 +113,14 @@ class Bird
     puts "center @delta: #{@delta}"
   end
   
+  def avoid
+    $obstacles.each do |obstacle|
+      if distance_from_point(obstacle) < OBSTACLE_SIZE + BIRD_SIZE*3
+        @delta += (self.position - obstacle)/1.5
+      end
+    end
+  end
+
   def allow_fallthrough
     x = case
     when @position[0] < 0 then WORLD[:xmax] + @position[0]
@@ -129,7 +137,7 @@ class Bird
 
   def move
     @delta = Vector[0,0]
-    %w[separate align cohere muffle center].each do |action|
+    %w[separate align cohere muffle center avoid].each do |action|
       puts "action: #{action}"
       self.send action
     end
